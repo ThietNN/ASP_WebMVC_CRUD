@@ -33,7 +33,7 @@ namespace ASP_CRUD.Controllers
             {
                 _db.categories.Add(category);
                 _db.SaveChanges();
-                TempData["Success"] = "Category created successfully";
+                // TempData["Success"] = "Category created successfully";
                 return RedirectToAction("Index");
             }
             return View(category);
@@ -54,7 +54,7 @@ namespace ASP_CRUD.Controllers
             return View(categoryFromDb);
         }
 
-        [HttpPost]
+        [HttpPut]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(Category category)
         {
@@ -62,7 +62,7 @@ namespace ASP_CRUD.Controllers
             {
                 _db.categories.Update(category);
                 _db.SaveChanges();
-                TempData["Success"] = "Category updated successfully";
+                // TempData["Success"] = "Category updated successfully";
                 return RedirectToAction("Index");
             }
             return View(category);
@@ -93,8 +93,22 @@ namespace ASP_CRUD.Controllers
             }
             _db.categories.Remove(category);
             _db.SaveChanges();
-            TempData["Success"] = "Category deleted successfully";
+            // TempData["Success"] = "Category deleted successfully";
             return RedirectToAction("Index");
+        }
+        public IActionResult Detail(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            var categoryFromDb = _db.categories.Find(id);
+            if (categoryFromDb == null)
+            {
+                return NotFound();
+            }
+            return View(categoryFromDb);
+
         }
     }
 

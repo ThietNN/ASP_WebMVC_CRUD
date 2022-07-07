@@ -11,6 +11,6 @@ namespace ASP_CRUD.Data
         }
         public DbSet<Category> categories { get; set; }
 
-        //public DbSet<Book> books { get; set; }
+        public DbSet<Book> books { get; set; }
     }
 }
